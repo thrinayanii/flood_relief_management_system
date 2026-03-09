@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </head>
 <body class="bg-light d-flex flex-column min-vh-100 m-0 p-0">
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
         <div class="container">
-            <a class="navbar-brand fw-bold text-primary" href="dashboard.php">
+            <a class="navbar-brand fw-bold text-primary" href="dashboard.html">
                 <i class="bi bi-shield-fill-check me-2"></i>
                 Flood Relief System
             </a>
@@ -20,16 +20,16 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="dashboard.php">Dashboard</a>
+                        <a class="nav-link active" href="dashboard.html">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="create_request.php">Create Request</a>
+                        <a class="nav-link" href="create_request.html">Create Request</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="view_requests.php">My Requests</a>
+                        <a class="nav-link" href="view_requests.html">My Requests</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php">Logout</a>
+                        <a class="nav-link" href="index.html">Logout</a>
                     </li>
                 </ul>
             </div>
@@ -41,7 +41,7 @@
         <p class="lead mb-0">If you need relief assistance, submit a request using our 'Create New Request' form. Your safety is our priority.</p>
     </div>
 
-    <div class="container py-5">
+    <div class="container py-5 flex-grow-1">
         <form class="card border-0 mb-4" method="get">
             <div class="card-body">
                 <div class="row g-3 align-items-end">
@@ -84,7 +84,7 @@
 
         <div class="row g-4">
             <div class="col-12">
-                <div class="card border-0 shadow-sm">
+                <div class="card border-0">
                     <div class="card-body text-center py-5">
                         <i class="bi bi-inbox" style="font-size: 5rem; opacity: 0.3;"></i>
                         <h3 class="mt-4 mb-3">No Requests Found</h3>
@@ -97,7 +97,7 @@
             </div>
 
             <div class="col-lg-6">
-                <div class="card border-0 shadow-sm h-100">
+                <div class="card border-0 h-100">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-start mb-3">
                             <div>
@@ -155,12 +155,13 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        <footer class="bg-dark text-white text-center py-4 mt-5">
-            <div class="container">
-                <p class="mb-0">&copy; 2026 Flood Relief Management System.</p>
-            </div>
-        </footer>
+    <footer class="bg-dark text-white text-center py-4 mt-auto w-100">
+        <div class="container">
+            <p class="mb-0">&copy; 2026 Flood Relief Management System.</p>
+        </div>
+    </footer>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     </body>
