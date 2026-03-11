@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports - Admin Panel</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</head>
+<body class="bg-light">
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-primary" href="admin_dashboard.html">
+                <i class="bi bi-shield-fill-check me-2"></i>
+                Admin Panel
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="admin_dashboard.html">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="admin_users.html">Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="admin_requests.html">All Requests</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="admin_reports.html">Reports</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="backend/auth/logout.php">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container py-5">
+        <!-- Page Header -->
+        <div class="mb-4">
+            <h1 class="display-5 fw-bold">
+                <i class="bi bi-file-earmark-bar-graph text-primary"></i> 
+                System Reports
+            </h1>
+            <p class="lead text-muted">Filter and view summarized system data</p>
+        </div>
+
+        <!-- Filter Section -->
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">
+                    <i class="bi bi-funnel me-2"></i>
+                    Filter Options
+                </h5>
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">District / Area</label>
+                            <select class="form-select form-select-lg">
+                                <option value="">All Districts</option>
+                                <option value="Colombo">Colombo</option>
+                                <option value="Gampaha">Gampaha</option>
+                                <option value="Kalutara">Kalutara</option>
+                                <option value="Kandy">Kandy</option>
+                                <option value="Galle">Galle</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">Type of Relief</label>
+                            <select class="form-select form-select-lg">
+                                <option value="">All Types</option>
+                                <option value="Food">Food</option>
+                                <option value="Water">Water</option>
+                                <option value="Medicine">Medicine</option>
+                                <option value="Shelter">Shelter</option>
+                            </select>
+                        </div>
+
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="bi bi-search me-2"></i>
+                                Generate Report
+                            </button>
+                            <button type="reset" class="btn btn-outline-secondary btn-lg">
+                                <i class="bi bi-arrow-counterclockwise me-2"></i>
+                                Reset
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Summary Report -->
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header bg-white">
+                <h5 class="mb-0 fw-bold">Summary Report</h5>
+                <small class="text-muted">Generated on February 4, 2026</small>
+            </div>
+            <div class="card-body">
+                <div class="row g-4">
+                    <div class="col-md-3">
+                        <div class="border rounded p-3 text-center bg-light">
+                            <h3 class="fw-bold text-primary mb-1">125</h3>
+                            <p class="text-muted mb-0 small">Total Registered Users</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="border rounded p-3 text-center bg-light">
+                            <h3 class="fw-bold text-danger mb-1">42</h3>
+                            <p class="text-muted mb-0 small">High Severity Households</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="border rounded p-3 text-center bg-light">
+                            <h3 class="fw-bold text-success mb-1">60</h3>
+                            <p class="text-muted mb-0 small">Food Requests</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="border rounded p-3 text-center bg-light">
+                            <h3 class="fw-bold text-info mb-1">20</h3>
+                            <p class="text-muted mb-0 small">Water Requests</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="border rounded p-3 text-center bg-light">
+                            <h3 class="fw-bold text-danger mb-1">5</h3>
+                            <p class="text-muted mb-0 small">Medicine Requests</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="border rounded p-3 text-center bg-light">
+                            <h3 class="fw-bold text-warning mb-1">4</h3>
+                            <p class="text-muted mb-0 small">Shelter Requests</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="border rounded p-3 text-center bg-light">
+                            <h3 class="fw-bold text-warning mb-1">30</h3>
+                            <p class="text-muted mb-0 small">Medium Severity</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="border rounded p-3 text-center bg-light">
+                            <h3 class="fw-bold text-success mb-1">17</h3>
+                            <p class="text-muted mb-0 small">Low Severity</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detailed Table -->
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white">
+                <h5 class="mb-0 fw-bold">Request Details</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Request ID</th>
+                                <th>Type</th>
+                                <th>District</th>
+                                <th>GN Division</th>
+                                <th>Severity</th>
+                                <th>Family Members</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#001</td>
+                                <td><span class="badge bg-success">Food</span></td>
+                                <td>Colombo</td>
+                                <td>Kaduwela</td>
+                                <td><span class="badge bg-danger">High</span></td>
+                                <td>5</td>
+                                <td><span class="badge bg-warning text-dark">Pending</span></td>
+                            </tr>
+                            <tr>
+                                <td>#002</td>
+                                <td><span class="badge bg-info">Water</span></td>
+                                <td>Gampaha</td>
+                                <td>Ja-Ela</td>
+                                <td><span class="badge bg-warning text-dark">Medium</span></td>
+                                <td>3</td>
+                                <td><span class="badge bg-success">Approved</span></td>
+                            </tr>
+                            <tr>
+                                <td>#003</td>
+                                <td><span class="badge bg-danger">Medicine</span></td>
+                                <td>Kalutara</td>
+                                <td>Panadura</td>
+                                <td><span class="badge bg-success">Low</span></td>
+                                <td>4</td>
+                                <td><span class="badge bg-success">Completed</span></td>
+                            </tr>
+                            <tr>
+                                <td>#004</td>
+                                <td><span class="badge bg-warning text-dark">Shelter</span></td>
+                                <td>Ratnapura</td>
+                                <td>Balangoda</td>
+                                <td><span class="badge bg-danger">High</span></td>
+                                <td>6</td>
+                                <td><span class="badge bg-warning text-dark">Pending</span></td>
+                            </tr>
+                            <tr>
+                                <td>#005</td>
+                                <td><span class="badge bg-success">Food</span></td>
+                                <td>Galle</td>
+                                <td>Hikkaduwa</td>
+                                <td><span class="badge bg-warning text-dark">Medium</span></td>
+                                <td>2</td>
+                                <td><span class="badge bg-success">Approved</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <nav class="mt-4">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#">Previous</a>
+                        </li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-4 mt-5">
+        <div class="container">
+            <p class="mb-0">&copy; 2026 Flood Relief Management System. Created for humanity by humanity <i class="bi bi-heart-fill text-danger"></i></p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

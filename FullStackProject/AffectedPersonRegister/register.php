@@ -3,7 +3,7 @@
 include 'C:\Users\Gowthaman\Desktop\XAMPP\htdocs\FullStackProject\connection.php';
 
     $role = "Affected Person";
-    $firstname = $_POST['fname'];
+    $firstName = $_POST['firstName'];
     $phone = $_POST["phone"];
     $email = $_POST["email"];
     $password = $_POST["password"];
@@ -17,15 +17,15 @@ include 'C:\Users\Gowthaman\Desktop\XAMPP\htdocs\FullStackProject\connection.php
     $stmt-> close();
 
     $stmt = $conn->prepare("INSERT INTO affectedperson
-    (LoginID, AffectedPersonName,AffectedPersonContactNo)
+    (LoginID,AffectedPersonName,AffectedPersonContactNo)
     VALUES
     (?, ?, ?)");
-    $stmt->bind_param("iss", $login,$firstname,$phone);
+    $stmt->bind_param("iss", $login,$firstName,$phone);
     $stmt -> execute();
     $stmt->close();
     $conn->close();
 
-    header("Location: http://localhost/DBMS/LoginForm/loginform.html");
+    header("Location: http://localhost/FullStackProject/LoginForm/login.html");
     exit();
 
 ?>
