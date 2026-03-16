@@ -20,21 +20,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="admin_dashboard.html">Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="admin_users.html">Users</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="admin_requests.html">All Requests</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="admin_reports.html">Reports</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="backend/auth/logout.php">Logout</a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link" href="admin_dashboard.html">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="admin_users.html">Users</a></li>
+                    <li class="nav-item"><a class="nav-link" href="admin_requests.html">All Requests</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="admin_reports.html">Reports</a></li>
+                    <li class="nav-item"><a class="nav-link" href="backend/auth/logout.php">Logout</a></li>
                 </ul>
             </div>
         </div>
@@ -54,10 +44,7 @@
 
     <div class="card border-0 shadow-sm mb-4">
         <div class="card-header bg-primary text-white">
-            <h5 class="mb-0">
-                <i class="bi bi-funnel me-2"></i>
-                Filter Options
-            </h5>
+            <h5 class="mb-0"><i class="bi bi-funnel me-2"></i>Filter Options</h5>
         </div>
         <div class="card-body">
             <form method="get" action="admin_reports.php">
@@ -77,66 +64,120 @@
                             <!--add php-->
                         </select>
                     </div>
-
+                    <div class="col-md-4">
+                        <label class="form-label fw-semibold">Severity Level</label>
+                        <select name="severity" class="form-select">
+                            <option value="">All Severities</option>
+                            <option value="High">High</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low">Low</option>
+                        </select>
+                    </div>
                     <div class="col-12">
-                        <button type="submit" class="btn btn-primary btn-lg">
-                            <i class="bi bi-search me-2"></i>
-                            Generate Report
-                        </button>
-                        <button type="reset" class="btn btn-outline-secondary btn-lg">
-                            <i class="bi bi-arrow-counterclockwise me-2"></i>
-                            Reset
-                        </button>
+                        <button type="submit" class="btn btn-primary btn-lg"><i class="bi bi-search me-2"></i>Generate Report</button>
+                        <button type="reset" class="btn btn-outline-secondary btn-lg"><i class="bi bi-arrow-counterclockwise me-2"></i>Reset</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- Summary Report -->
-    <div class="card border-0 shadow-sm mb-4">
-        <div class="card-header bg-white">
-            <h5 class="mb-0 fw-bold">Summary Report</h5>
-            <small class="text-muted">Generated on date</small>
-        </div>
-        <div class="card-body">
-            <div class="row g-4">
-                <!--<div class=\"col-md-3\">
-                <div class=\"border rounded p-3 text-center bg-light\">
-                <h3 class=\"fw-bold text-primary mb-1\">{$item['value']}</h3>
-                <p class=\"text-muted mb-0 small\">{$item['label']}</p>
+    <div>
+        <div class="card border-0 shadow-sm rounded-bottom-0">
+            <div class="card-body bg-primary text-white p-4">
+                <div class="row align-items-center">
+                    <div class="col-auto">
+                        <div class="border border-warning rounded-circle d-flex align-items-center justify-content-center" style="width:64px;height:64px;">
+                            <i class="bi bi-shield-fill-check text-warning fs-2"></i>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="text-warning small fw-semibold mb-1">MINISTRY OF DISASTER MANAGEMENT, SRI LANKA</div>
+                        <h3 class="fw-bold mb-1">Flood Relief Management System</h3>
+                        <div class="text-white-50 small">Official Analytical Report — Disaster Relief Operations</div>
+                    </div>
                 </div>
-                </div>"; -->
             </div>
-        </div>
-    </div>
 
-    <div class="card border-0 shadow-sm">
-        <div class="card-header bg-white">
-            <h5 class="mb-0 fw-bold">Request Details</h5>
+            <div class="card-footer bg-light py-2 px-4">
+                <div class="row g-3">
+                    <div class="col-auto">
+                        <span class="text-muted small fw-semibold text-uppercase">District:</span>
+                        <!-- PHP -->
+                        <span class="fw-bold small ms-1">All Districts</span>
+                    </div>
+                    <div class="col-auto">
+                        <span class="text-muted small fw-semibold text-uppercase">Relief Type:</span>
+                        <!-- PHP -->
+                        <span class="fw-bold small ms-1">All Types</span>
+                    </div>
+                    <div class="col-auto">
+                        <span class="text-muted small fw-semibold text-uppercase">Severity:</span>
+                        <!-- PHP -->
+                        <span class="fw-bold small ms-1">All Severities</span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-hover">
-                    <thead class="table-light">
-                        <tr>
-                            <th>Request ID</th>
-                            <th>Type</th>
-                            <th>District</th>
-                            <th>GN Division</th>
-                            <th>Severity</th>
-                            <th>Family Members</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!--replace w real data-->
-                    </tbody>
-                </table>
+
+        <!-- Report Body -->
+        <div class="card border-0 shadow-sm border-top-0 rounded-0">
+            <div class="card-body p-4">
+
+                <h5 class="fw-bold text-primary border-bottom border-primary pb-2 mb-3">
+                    <i class="bi bi-bar-chart-steps me-2"></i>Key Metrics
+                </h5>
+
+                <dl class="row">
+                    <dt class="col-sm-5 col-md-4 text-muted fw-semibold py-2 border-bottom">Total Requests</dt>
+                    <!-- PHP -->
+                    <dd class="col-sm-7 col-md-8 fw-bold py-2 border-bottom mb-0">—</dd>
+
+                    <dt class="col-sm-5 col-md-4 text-muted fw-semibold py-2 border-bottom">Total Individuals Affected</dt>
+                    <!-- PHP -->
+                    <dd class="col-sm-7 col-md-8 fw-bold py-2 border-bottom mb-0">—</dd>
+
+                    <dt class="col-sm-5 col-md-4 text-muted fw-semibold py-2 border-bottom">Approved Requests</dt>
+                    <!-- PHP -->
+                    <dd class="col-sm-7 col-md-8 fw-bold py-2 border-bottom mb-0">—</dd>
+
+                    <dt class="col-sm-5 col-md-4 text-muted fw-semibold py-2 border-bottom">Pending Requests</dt>
+                    <!-- PHP: echo $pending -->
+                    <dd class="col-sm-7 col-md-8 fw-bold py-2 border-bottom mb-0">—</dd>
+
+                    <dt class="col-sm-5 col-md-4 text-muted fw-semibold py-2 border-bottom">Processing Requests</dt>
+                    <!-- PHP -->
+                    <dd class="col-sm-7 col-md-8 fw-bold py-2 border-bottom mb-0">—</dd>
+
+                    <dt class="col-sm-5 col-md-4 text-muted fw-semibold py-2 border-bottom">Rejected Requests</dt>
+                    <!-- PHP -->
+                    <dd class="col-sm-7 col-md-8 fw-bold py-2 border-bottom mb-0">—</dd>
+
+                    <dt class="col-sm-5 col-md-4 text-muted fw-semibold py-2 border-bottom">High Severity Cases</dt>
+                    <!-- PHP -->
+                    <dd class="col-sm-7 col-md-8 fw-bold py-2 border-bottom mb-0">—</dd>
+
+                    <dt class="col-sm-5 col-md-4 text-muted fw-semibold py-2 border-bottom">Medium Severity Cases</dt>
+                    <!-- PHP -->
+                    <dd class="col-sm-7 col-md-8 fw-bold py-2 border-bottom mb-0">—</dd>
+
+                    <dt class="col-sm-5 col-md-4 text-muted fw-semibold py-2 border-bottom">Low Severity Cases</dt>
+                    <!-- PHP -->
+                    <dd class="col-sm-7 col-md-8 fw-bold py-2 border-bottom mb-0">—</dd>
+                </dl>
+
+            </div>
+        </div>
+
+        <div class="card border-0 shadow-sm border-top-0 rounded-top-0">
+            <div class="card-footer bg-light d-flex justify-content-between align-items-center py-3 px-4">
+                <div>
+                    <p class="mb-0 small text-muted">This report is system-generated and intended for authorized administrative personnel only.</p>
+                    <p class="mb-0 small text-muted">Flood Relief Management System — <strong>Ministry of Disaster Management, Sri Lanka</strong></p>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
     <footer class="bg-dark text-white text-center py-4 mt-5">
         <div class="container">
@@ -146,4 +187,3 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html>
