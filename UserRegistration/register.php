@@ -2,8 +2,8 @@
 
 include 'C:\Users\Gowthaman\Desktop\XAMPP\htdocs\FullStackProject\connection.php';
 
-    $role = "Volunteer";
-    $firstname = $_POST['fname'];
+    $role = "User";
+    $name = $_POST['name'];
     $phone = $_POST["phone"];
     $email = $_POST["email"];
     $password = $_POST["password"];
@@ -16,16 +16,16 @@ include 'C:\Users\Gowthaman\Desktop\XAMPP\htdocs\FullStackProject\connection.php
 
     $stmt-> close();
 
-    $stmt = $conn->prepare("INSERT INTO affectedperson
-    (LoginID, AffectedPersonName,AffectedPersonContactNo)
+    $stmt = $conn->prepare("INSERT INTO user
+    (LoginID,UserName,UserContactNo)
     VALUES
     (?, ?, ?)");
-    $stmt->bind_param("iss", $login,$firstname,$phone);
+    $stmt->bind_param("iss", $login,$name,$phone);
     $stmt -> execute();
     $stmt->close();
     $conn->close();
-
-    header("Location: http://localhost/DBMS/LoginForm/loginform.html");
+    
+    header("Location: http://localhost/FullStackProject/LoginForm/login.html?success=1");
     exit();
 
 ?>

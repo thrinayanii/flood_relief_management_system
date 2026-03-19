@@ -1,9 +1,9 @@
 <?php
 
-include 'C:\Users\Gowthaman\Desktop\XAMPP\htdocs\FullStackProject\connection.php';
+include 'connection.php';
 
 $stmt = $conn->prepare("SELECT COUNT(*) AS total_users 
-        FROM affectedperson");
+        FROM user");
 
 $stmt->execute();
 $result = $stmt->get_result();
@@ -46,5 +46,13 @@ $total_districts = $row['total_districts'];
 
 $stmt->close();
 $conn->close();
+
+$data = [
+    "users" => $total_users,
+    "requests" => $total_requests,
+    "severity" => $total_high,
+    "districts" => $total_districts
+];
+
+echo json_encode($data);
 ?>
-        
