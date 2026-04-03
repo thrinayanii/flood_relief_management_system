@@ -1,0 +1,229 @@
+<?php
+session_start();
+
+include 'connection.php';
+
+$row = null;
+
+if(isset($_GET['id'])){
+
+    $id = $_GET['id'];
+
+    $stmt = $conn->prepare("SELECT * FROM reliefdetails WHERE ReliefID = ?");
+    $stmt->bind_param("i",$id);
+    $stmt->execute();
+
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+}
+
+$UserID = $_SESSION['userid'];
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Create Relief Request - Flood Relief Management System</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    </head>
+
+    <body class="bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+            <div class="container">
+                <a class="navbar-brand fw-bold text-primary" href="http://localhost/FullStackProject/User/dashboard.php">
+                    <i class="bi bi-shield-fill-check me-2"></i>
+                    Flood Relief System
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="http://localhost/FullStackProject/User/dashboard.php">Dashboard</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="http://localhost/FullStackProject/User/create_request.php">Create Request</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="http://localhost/FullStackProject/User/view_requests.php">My Requests</a></li>
+                        <li class="nav-item"><a class="nav-link" href="http://localhost/FullStackProject/index.html">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="text-center mb-5">
+                        <h1 class="display-5 fw-bold">Create Relief Request</h1>
+                        <p class="lead text-muted">Please fill in all the required information for your relief request.
+                        </p>
+                    </div>
+
+                    <div class="alert alert-info border-info" role="alert">
+                        <i class="bi bi-info-circle me-2"></i>
+                        <strong>Note:</strong> All fields marked with <span class="text-danger">*</span> are required.
+                    </div>
+
+                    <div class="card border-0">
+                        <div class="card-body p-4 p-md-5">
+                            <form id="reliefRequestForm" action="submit_request.php" method="POST">
+                                    <input type="hidden" name="ReliefID" value="<?php echo $row ? $row['ReliefID'] : ''; ?>">
+                                <div class="mb-4">
+                                    <h5 class="fw-bold text-primary border-bottom border-primary pb-2 mb-4"><i
+                                            class="bi bi-file-earmark-text me-2"></i>Relief Details</h5>
+
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="reliefType" class="form-label fw-semibold">
+                                                Type of Relief <span class="text-danger">*</span>
+                                            </label>
+                                            <select class="form-select form-select-lg" id="reliefType"
+                                                name="relief_type" required>
+                                                <option value="">Select relief type</option>
+                                                <option value="Food" <?php if($row && $row['TypeofRelief']=="Food") echo "selected"; ?>>Food</option>
+                                                <option value="Water" <?php if($row && $row['TypeofRelief']=="Water") echo "selected"; ?>>Water</option>
+                                                <option value="Medicine" <?php if($row && $row['TypeofRelief']=="Medicine") echo "selected"; ?>>Medicine</option>
+                                                <option value="Shelter" <?php if($row && $row['TypeofRelief']=="Shelter") echo "selected"; ?>>Shelter</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                            <label for="floodSeverity" class="form-label fw-semibold">
+                                                Flood Severity Level <span class="text-danger">*</span>
+                                            </label>
+                                            <select class="form-select form-select-lg" id="floodSeverity"
+                                                name="flood_severity" required>
+                                                <option value="">Select severity level</option>
+                                                <option value="Low" <?php if($row && $row['FloodSeverityLevel']=="Low") echo "selected"; ?>>Low</option>
+                                                <option value="Medium" <?php if($row && $row['FloodSeverityLevel']=="Medium") echo "selected"; ?>>Medium</option>
+                                                <option value="High" <?php if($row && $row['FloodSeverityLevel']=="High") echo "selected"; ?>>High</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <h5 class="fw-bold text-primary border-bottom border-primary pb-2 mb-4"><i
+                                            class="bi bi-geo-alt me-2"></i>Location Information</h5>
+
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="district" class="form-label fw-semibold">
+                                                District <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text" class="form-control form-control-lg" id="district"
+                                                name="district" required value="<?php echo $row ? $row['District'] : ''; ?>">
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                            <label for="divisionalSecretariat" class="form-label fw-semibold">
+                                                Divisional Secretariat <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text" class="form-control form-control-lg"
+                                                id="divisionalSecretariat" name="divisional_secretariat" required value="<?php echo $row ? $row['DivisionalSecretariat'] : ''; ?>">
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="gnDivision" class="form-label fw-semibold">
+                                                GN Division <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text" class="form-control form-control-lg" id="gnDivision"
+                                                name="gn_division" required value="<?php echo $row ? $row['GNDivision'] : ''; ?>">
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                            <label for="address" class="form-label fw-semibold">
+                                                Address <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text" class="form-control form-control-lg" id="address"
+                                                name="address" placeholder="Full residential address" required value="<?php echo $row ? $row['Address'] : ''; ?>">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <h5 class="fw-bold text-primary border-bottom border-primary pb-2 mb-4"><i
+                                            class="bi bi-people me-2"></i>Household Details</h5>
+
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="contactName" class="form-label fw-semibold">
+                                                Contact Person Name <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text" class="form-control form-control-lg" id="contactName"
+                                                name="contact_name" required value="<?php echo $row ? $row['ContactPersonName'] : ''; ?>">
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                            <label for="contactNumber" class="form-label fw-semibold">
+                                                Contact Number <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="tel" class="form-control form-control-lg" id="contactNumber"
+                                                name="contact_number" placeholder="0701234567" pattern="[0-9]{10}"
+                                                title="Enter 10 digit phone number" required value="<?php echo $row ? $row['ContactPersonNumber'] : ''; ?>">
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="familyMembers" class="form-label fw-semibold">
+                                                Number of Family Members <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="number" class="form-control form-control-lg" id="familyMembers"
+                                                name="family_members" min="1" max="100" required value="<?php echo $row ? $row['NoOfFamilyMembers'] : ''; ?>">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <h5 class="fw-bold text-primary border-bottom border-primary pb-2 mb-4"><i
+                                            class="bi bi-card-text me-2"></i>Additional Information</h5>
+
+                                    <div class="mb-3">
+                                        <label for="description" class="form-label fw-semibold">Description & Special
+                                            Requirements</label>
+                                        <textarea class="form-control form-control-lg" id="description" 
+                                            name="description" rows="5"
+                                            placeholder="Please describe your situation and any additional or special requirements..." ><?php echo $row ? $row['Description'] : ''; ?></textarea>
+                                        <div class="form-text">Include any medical needs, dietary restrictions, or
+                                            urgent requirements</div>
+                                    </div>
+                                </div>
+
+                                <input type="hidden" id="userId" name="user_id">
+
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-5">
+                                    <a href="http://localhost/FullStackProject/User/view_requests.php" 
+                                        class="btn btn-outline-secondary btn-lg">
+                                        <i class="bi bi-x-circle me-2"></i>Cancel
+                                    </a>
+                                    <a href="http://localhost/FullStackProject/User/create_request.php" 
+                                        class="btn btn-outline-secondary btn-lg">
+                                        <i class="bi bi-arrow-counterclockwise me-2"></i>Clear
+                                    </a>
+                                    <button type="submit" class="btn btn-primary btn-lg">
+                                        <i class="bi bi-check-circle me-2"></i>Submit Request
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="bg-dark text-white text-center py-4 mt-5">
+            <div class="container">
+                <p class="mb-0">&copy; 2026 Flood Relief Management System.</p>
+            </div>
+        </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+
+</html>

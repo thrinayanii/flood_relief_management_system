@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include 'C:\Users\Gowthaman\Desktop\XAMPP\htdocs\FullStackProject\connection.php';
+include 'connection.php';
 
 $email = $_POST['email'];
 $password = $_POST['password'];
@@ -22,17 +22,19 @@ if($results->num_rows === 0){
     $_SESSION['loginid'] = $user['LoginID'];
     $_SESSION['role'] = $user['UserRole'];
 
-    if($user['UserRole'] === 'Affected Person'){
-        $stmt = $conn-> prepare("SELECT AffectedPersonName
-        FROM affectedperson
-        WHERE LoginID = ?");
+if($user['UserRole'] === 'User'){
+    $stmt = $conn-> prepare("SELECT UserID,UserName
+    FROM user
+    WHERE LoginID = ?");
     
 
     $stmt->bind_param("i",$user['LoginID']);
     $stmt->execute();
     $cust = $stmt->get_result()->fetch_assoc();
-    echo "Give me some time :)";
-    //header("Location: http://localhost/FullStackProject/AffectedPersonRegister/register.html");
+    $_SESSION['name'] = $cust['UserName']; 
+    $_SESSION['userid'] = $cust['UserID'];
+    
+    header("Location: http://localhost/FullStackProject/User/dashboard.php");
     exit();
     }
 
@@ -46,8 +48,8 @@ else if ($user['UserRole'] === 'Admin') {
     $stmt->bind_param("i", $user['LoginID']);
     $stmt->execute();
     $sup = $stmt->get_result()->fetch_assoc();
-    echo "Give me some time :)";
-    //header("");
+
+    header("Location: http://localhost/FullStackProject/Admin/AdminDashboard/admin_dashboard.html");
     exit();
 }
 
